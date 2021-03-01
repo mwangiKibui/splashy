@@ -1,3 +1,4 @@
+import {useRouter} from "next/router";
 
 //components
 import PhotoWrapper from "../../styles/Photo.style";
@@ -5,6 +6,15 @@ import Photo from "../../components/Photo/Photo";
 import {fetchPhoto,fetchPhotos} from '../../library/photos/photos';
 
 function PhotoComponent({photo}){
+
+    const router = useRouter();
+
+    if(router.isFallback) return (
+        <p>
+            Loading..
+        </p>
+    )
+
     return (
         <PhotoWrapper>
 
@@ -40,9 +50,10 @@ export async function getStaticPaths(){
 
     //let url = process.env.SERVER_URL;
 
-    let photos = await fetchPhotos(1,20).catch(console.log);
+    let photos = await fetchPhotos(1,4).catch(console.log);
 
     let paths = photos.map((photo) => {
+
         return {
             params:{
                 photoId:photo['id']

@@ -1,3 +1,4 @@
+import {useRouter} from "next/router";
 
 //components
 import UserPageWrapper from "../../styles/User.style";
@@ -8,7 +9,15 @@ import {fetchUser} from '../../library/users/users';
 import {fetchPhotos} from '../../library/photos/photos';
 
 function UserPage({user}){
-      
+
+    const router = useRouter();  
+
+    if(router.isFallback) return (
+        <p>
+            Loading..
+        </p>
+    )
+
     return(
         <UserPageWrapper>
 
