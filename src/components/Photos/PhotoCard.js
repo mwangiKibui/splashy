@@ -1,14 +1,10 @@
 
-import {useState} from "react";
 import Link from 'next/link';
 
 //components
 import {PhotoCardWrapper} from './Photos.style';
 
 const PhotoCard = (photo) => {
-
-    const [loaded,setLoaded] = useState(false);
-    const [thumbnail_loaded,setThumbnailLoaded] = useState(false);
 
      
     return (
@@ -17,20 +13,10 @@ const PhotoCard = (photo) => {
 
             <Link href={`/photo/${photo['photo']['id']}`}>
             <a>
-            <div className="card-img-top-preloader"  
-            style={{display:loaded ? 'none' : 'block'}}
-            />
-            </a>
-            </Link>
-
-            <Link href={`/photo/${photo['photo']['id']}`}>
-            <a>
             <img
-            onLoad={ () => setLoaded(true)}
             className="card-img-top"
-            src={photo['photo'].urls.full}
+            src={photo['photo'].urls.small}
             alt={photo['photo'].alt_description}
-            style={{display:loaded ? 'block' : "none" }}
             />
             </a>
             </Link>
@@ -38,26 +24,16 @@ const PhotoCard = (photo) => {
             <div className="card-body">
 
                 <div className="media">
-                    
-                    <Link href={`/users/${photo['photo']['user']['username']}`}>
-                    <a>
-                    <div className="card-body-media-image-preloader"
-                    style={{display:thumbnail_loaded ? 'none' : 'block'}}
-                    />
-                    </a>
-                    </Link>
 
                     <Link href={`/users/${photo['photo']['user']['username']}`}>
                     <a>
                     <img 
-                    onLoad={() => setThumbnailLoaded(true)}
                     className="card-body-media-image"
                     src={
                         photo['photo'].user.profile_image ? 
-                        photo['photo'].user.profile_image.medium : 
+                        photo['photo'].user.profile_image.large : 
                         "/images/avatar.png"
                     }
-                    style={{display:thumbnail_loaded ? 'block' : 'none'}}
                     />
                     </a>
                     </Link>

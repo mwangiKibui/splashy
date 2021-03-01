@@ -1,4 +1,4 @@
-import {useState} from "react";
+
 import Link from "next/link";
 
 //components
@@ -7,7 +7,6 @@ import {UserPhotosWrapper,UserPhotosHeading} from "./User.style";
 function UserPhotos({user}){
 
     const photos = user.photos;
-    const [loaded,setLoaded] = useState(false);
 
     return(
         <UserPhotosWrapper>
@@ -20,30 +19,14 @@ function UserPhotos({user}){
                        <div className="col-12 col-sm-3 col-md-3" key={i}>
                            <div className="card">
 
-                               {/** preloader */}    
-                               <Link href={`/photo/${photo['id']}`}>
-
-                                <a>
-
-                                   <div className="card-photo-preloader" style={{
-                                   display:loaded ? 'none' : 'block'
-                                    }} /> 
-
-                                </a>
-
-                               </Link>
 
                                {/** image */}                       
                                <Link href={`/photo/${photo['id']}`}>
                                 <a>                             
 
                                     <img
-                                    onLoad={() => setLoaded(true)}
-                                    style={{
-                                        display:loaded ? 'block' : 'none'
-                                    }}
                                     className="card-photo"
-                                    src={photo['urls']['full']}
+                                    src={photo['urls']['small']}
                                     alt="card_photo"
                                     />
 

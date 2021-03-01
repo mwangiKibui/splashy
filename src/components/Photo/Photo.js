@@ -1,4 +1,3 @@
-import {useState} from "react";
 import Link from "next/link";
 
 //components
@@ -6,25 +5,14 @@ import PhotoWrapper from "./Photo.style";
 
 const Photo = ({photo}) => {
 
-    const [main_loaded,setMainLoaded] = useState(false);
-    const [user_loaded,setUserLoaded] = useState(false);
-
     return (
         <PhotoWrapper>
 
             <div className="media">
 
-                <div className="photo-media-img-preloader" 
-                style={{ display:main_loaded ? 'none' : 'block' }}
-                />
-
                 <img
-                onLoad={() => setMainLoaded(true)}
                 className="photo-media-img"
-                style={{
-                    display:main_loaded ? 'block' : 'none'
-                }}
-                src={photo['urls']['full']}
+                src={photo['urls']['small']}
                 alt={photo['alt_description']}
                 />
 
@@ -36,18 +24,8 @@ const Photo = ({photo}) => {
 
                     <div className="media">
 
-                        <div className="photo-user-media-img-preloader"
-                        style={{
-                            display:user_loaded ? 'none' : 'block'
-                        }}
-                        />
-
                         <img
-                           onLoad={() => setUserLoaded(true)}
                            className="photo-user-media-img"
-                           style={{
-                               display:user_loaded ? 'block' : 'none'
-                           }}
                            src={
                                photo['user']['profile_image'] ? 
                                photo['user']['profile_image']['large'] : 
